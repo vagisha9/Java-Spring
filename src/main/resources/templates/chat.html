@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en" >
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,8 +9,6 @@
 </head>
 <body>
 <form th:object="${ChatForm}" action="#" th:action="@{/chat}" method="Post">
-    <label for="username">Username:</label>
-    <input id="username" type="text" th:field="*{username}">
     <label for="messageText">Message Text:</label>
     <input id="messageText" type="text" th:field="*{messageText}">
     <label for="messageType">Message Type: </label>
@@ -23,7 +21,7 @@
     </select>
     <input type="submit">
 </form>
-<div th:each= "chatMessage : ${chatMessage}">
+<div th:each= "chatMessage : ${chatMessages}">
     <span  th:text="${chatMessage.username}" >Username</span> : <span  th:text="${chatMessage.message}" >Hello world!</span>
 </div>
 </body>

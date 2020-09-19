@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.mapper.MessageMapper;
 import com.example.demo.model.ChatForm;
 import com.example.demo.model.ChatMessage;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,11 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    private List<ChatMessage> chatMessages;
+    private MessageMapper messageMapper;
+
+    public MessageService(MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
+    }
 
     public void addMessage(ChatForm chatForm){
         ChatMessage newMessage = new ChatMessage();
@@ -27,16 +32,15 @@ public class MessageService {
                 newMessage.setMessage(chatForm.getMessageText().toLowerCase());
                 break;
         }
-        this.chatMessages.add(newMessage);
+        this.messageMapper.addMessage(newMessage);
     }
 
     public List<ChatMessage> getChatMessages(){
-        return chatMessages;
+        return messageMapper.getAllMessages();
     }
 
     @PostConstruct
     public void postConstruct(){
         System.out.println("Creating message service bean");
-        this.chatMessages=new ArrayList<>();
     }
 }
